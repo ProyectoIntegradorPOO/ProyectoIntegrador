@@ -518,6 +518,7 @@ public class ManipulateComponents {
                         }
                     }
                     jPanel.setLocation(stop, jPanel.getY());
+                    jPanelXLeftc(0, 0, 10, 5, jPanel);
                 }
             }.start();
         }
@@ -544,4 +545,56 @@ public class ManipulateComponents {
             }.start();
         }
     }
+    public void jPanelXLeftc(final int start, final int stop, final int delay, final int increment, final JPanel jPanel) {
+        if (jPanel.getX() == start) {
+            new Thread() {
+                @Override
+                public void run() {
+                    while (jPanel.getX() > stop) {
+                        for (int i = start; i >= stop; i -= increment) {
+                            try {
+                                Thread.sleep(delay);
+                                jPanel.setSize(80, 480);
+                                jPanel.setLocation(i, jPanel.getY());
+                                
+                            }
+                            catch (InterruptedException e) {
+                                System.out.println("Error Thread Interrupted: " + e);
+                            }
+                        }
+                    }
+                   
+                    jPanel.setLocation(stop, jPanel.getY());
+                }
+            }.start();
+        }
+       // jPanel.setSize(80, 480);
+    }
+    
+    public void jPanelXRightc(final int start, final int stop, final int delay, final int increment, final JPanel jPanel) {
+        if (jPanel.getX() == start) {
+            new Thread() {
+                @Override
+                public void run() {
+                    while (jPanel.getX() <= start) {
+                        for (int i = start; i <= stop; i += increment) {
+                            try {
+                                Thread.sleep(delay);
+                                jPanel.setLocation(i, jPanel.getY());
+                                jPanel.setSize(180, 480);
+                            }
+                            catch (InterruptedException e) {
+                                System.out.println("Error Thread Interrupted: " + e);
+                            }
+                        }
+                    }
+                    jPanel.setLocation(stop, jPanel.getY());
+                }
+                
+            }.start();
+             jPanel.setSize(80, 480);
+        }
+        jPanel.setSize(80, 480);
+    }
+    
 }

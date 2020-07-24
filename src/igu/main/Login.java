@@ -129,6 +129,11 @@ public class Login extends javax.swing.JFrame {
 
         theButton1.setBackground(new java.awt.Color(0, 204, 204));
         theButton1.setText("INGRESAR");
+        theButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                theButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -258,6 +263,13 @@ public class Login extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void theButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton1ActionPerformed
+        // TODO add your handling code here:
+        MainFramee mf=new MainFramee();
+        mf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_theButton1ActionPerformed
 
     
     /**
