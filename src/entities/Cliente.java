@@ -13,5 +13,39 @@ public class Cliente {
     private int idcliente;
     private String nombre;
     private String telefono;
-    private String Dirección;
+    private String Direccion;
+
+    public int getIdcliente() {
+        return idcliente;
+    }
+
+    public void setIdcliente(int idcliente) {
+        this.idcliente = idcliente;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public String getDireccion() {
+        return Direccion;
+    }
+
+    public void setDireccion(String Dirección) {
+        this.Direccion = Dirección;
+    }
+    
+    
 }

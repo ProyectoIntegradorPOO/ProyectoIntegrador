@@ -57,7 +57,7 @@ public class Login extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        theButton1 = new igu.utils.buttons.TheButton();
+        theButton1 = new igu.util.buttons.TheButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -325,6 +325,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel minimizeLabel;
-    private igu.utils.buttons.TheButton theButton1;
+    private igu.util.buttons.TheButton theButton1;
     // End of variables declaration//GEN-END:variables
 }

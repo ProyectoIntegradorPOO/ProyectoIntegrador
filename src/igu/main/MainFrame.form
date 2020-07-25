@@ -87,7 +87,7 @@
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
             </Component>
-            <Component class="igu.utils.buttons.TheButton" name="ventasButton">
+            <Component class="igu.util.buttons.TheButton" name="ventasButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/igu/img/collection.png"/>
@@ -99,7 +99,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ventasButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="igu.utils.buttons.TheButton" name="comprasButton">
+            <Component class="igu.util.buttons.TheButton" name="comprasButton">
               <Properties>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/igu/img/market.png"/>
@@ -111,7 +111,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comprasButtonActionPerformed"/>
               </Events>
             </Component>
-            <Component class="igu.utils.buttons.TheButton" name="inventoryButton">
+            <Component class="igu.util.buttons.TheButton" name="inventoryButton">
               <Properties>
                 <Property name="text" type="java.lang.String" value="INVENTARIO"/>
               </Properties>

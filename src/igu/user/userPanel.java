@@ -31,8 +31,8 @@ public class userPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         UserTittleLabel = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        theButton1 = new igu.utils.buttons.TheButton();
-        theButton2 = new igu.utils.buttons.TheButton();
+        theButton1 = new igu.util.buttons.TheButton();
+        theButton2 = new igu.util.buttons.TheButton();
         userNameLabel = new javax.swing.JLabel();
         userLastNameLabel = new javax.swing.JLabel();
         userDniLabel = new javax.swing.JLabel();
@@ -194,8 +194,8 @@ public class userPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private igu.utils.buttons.TheButton theButton1;
-    private igu.utils.buttons.TheButton theButton2;
+    private igu.util.buttons.TheButton theButton1;
+    private igu.util.buttons.TheButton theButton2;
     private javax.swing.JLabel userDniLabel;
     private javax.swing.JLabel userLastNameLabel;
     private javax.swing.JLabel userNameLabel;

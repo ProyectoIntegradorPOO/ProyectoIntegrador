@@ -147,12 +147,12 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="igu.utils.buttons.TheButton" name="theButton1">
+            <Component class="igu.util.buttons.TheButton" name="theButton1">
               <Properties>
                 <Property name="text" type="java.lang.String" value="theButton1"/>
               </Properties>
             </Component>
-            <Component class="igu.utils.buttons.TheButton" name="theButton2">
+            <Component class="igu.util.buttons.TheButton" name="theButton2">
               <Properties>
                 <Property name="text" type="java.lang.String" value="theButton2"/>
               </Properties>

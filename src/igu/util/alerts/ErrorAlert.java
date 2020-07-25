@@ -45,7 +45,7 @@ public class ErrorAlert extends javax.swing.JDialog {
         Errortitle = new javax.swing.JLabel();
         Errormsg = new javax.swing.JLabel();
         errormsg1 = new javax.swing.JLabel();
-        errorAcceptButton = new igu.utils.buttons.TheButton();
+        errorAcceptButton = new igu.util.buttons.TheButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -214,7 +214,7 @@ public class ErrorAlert extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public static javax.swing.JLabel Errormsg;
     public static javax.swing.JLabel Errortitle;
-    private igu.utils.buttons.TheButton errorAcceptButton;
+    private igu.util.buttons.TheButton errorAcceptButton;
     private javax.swing.JLabel errorIconLabel;
     public static javax.swing.JLabel errormsg1;
     private javax.swing.JPanel mainErrorPanel;

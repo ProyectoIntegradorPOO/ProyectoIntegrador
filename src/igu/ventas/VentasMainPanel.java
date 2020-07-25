@@ -28,7 +28,7 @@ public class VentasMainPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        theButton1 = new igu.utils.buttons.TheButton();
+        theButton1 = new igu.util.buttons.TheButton();
 
         theButton1.setText("Vender");
 
@@ -64,6 +64,6 @@ public class VentasMainPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private igu.utils.buttons.TheButton theButton1;
+    private igu.util.buttons.TheButton theButton1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,9 +1,6 @@
 package igu.main;
 
-/**
- *
- * @author Asullom
- */
+    
 
 import javax.swing.JPanel;
 

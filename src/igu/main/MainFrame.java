@@ -37,9 +37,9 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         menubar = new javax.swing.JPanel();
         jButton3 = new javax.swing.JButton();
-        ventasButton = new igu.utils.buttons.TheButton();
-        comprasButton = new igu.utils.buttons.TheButton();
-        inventoryButton = new igu.utils.buttons.TheButton();
+        ventasButton = new igu.util.buttons.TheButton();
+        comprasButton = new igu.util.buttons.TheButton();
+        inventoryButton = new igu.util.buttons.TheButton();
         dp = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         mainPanel = new javax.swing.JPanel();
@@ -246,14 +246,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private igu.utils.buttons.TheButton comprasButton;
+    private igu.util.buttons.TheButton comprasButton;
     private javax.swing.JPanel dp;
-    private igu.utils.buttons.TheButton inventoryButton;
+    private igu.util.buttons.TheButton inventoryButton;
     private javax.swing.JButton jButton3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JPanel mainPanel;
     private javax.swing.JPanel menubar;
-    private igu.utils.buttons.TheButton ventasButton;
+    private igu.util.buttons.TheButton ventasButton;
     // End of variables declaration//GEN-END:variables
 }

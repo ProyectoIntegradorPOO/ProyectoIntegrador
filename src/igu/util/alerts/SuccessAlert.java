@@ -12,7 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import igu.utils.buttons.TheButton;
+import igu.util.buttons.TheButton;
 
 /**
  *
@@ -48,7 +48,7 @@ public class SuccessAlert extends javax.swing.JDialog {
         titulo = new javax.swing.JLabel();
         msj = new javax.swing.JLabel();
         msj1 = new javax.swing.JLabel();
-        aSIconButton1 = new igu.utils.buttons.TheButton();
+        aSIconButton1 = new igu.util.buttons.TheButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -214,7 +214,7 @@ public class SuccessAlert extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private igu.utils.buttons.TheButton aSIconButton1;
+    private igu.util.buttons.TheButton aSIconButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     public static javax.swing.JLabel msj;

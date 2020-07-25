@@ -592,9 +592,9 @@ public class ManipulateComponents {
                 }
                 
             }.start();
-             jPanel.setSize(80, 480);
+             //jPanel.setSize(80, 480);
         }
-        jPanel.setSize(80, 480);
+        //jPanel.setSize(80, 480);
     }
     
 }
