@@ -1,50 +1,58 @@
-package igu.proveedor;
+package igu.articles;
 
-
-import data.ProveedorData;
-import entities.Proveedor;
+import data.ArticulosData;
+import entities.Articulos;
+import igu.util.Config;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+
 
 /**
  *
  * @author Asullom
  */
-public class ProveedoresTableModel extends AbstractTableModel {
+public class TareaTableModel extends AbstractTableModel {
 
-    private List<Proveedor> lis = new ArrayList();
-    private String[] columns = {"#", "Nombres", "Teléfono", "Dirección", "info"};
-    private Class[] columnsType = {Integer.class, String.class, String.class, String.class, String.class};
+    private List<Articulos> lis = new ArrayList();
+    private String[] columns = {"#", "Asignatura", "Detalles", "Fecha Entrega", "Fecha Vencimiento"};
+    private Class[] columnsType = {Integer.class, String.class, String.class, String.class, String.class};// Date.class
+    
+    SimpleDateFormat iguSDF = new SimpleDateFormat(Config.DEFAULT_DATE_STRING_FORMAT_PE);
+    
 
-    public ProveedoresTableModel() {
-        lis = ProveedorData.list("");
+    public TareaTableModel() {
+        lis = ArticulosData.list("");
     }
 
-    public ProveedoresTableModel(String filter) {
-        lis = ProveedorData.list(filter);
+    public TareaTableModel(String filter) {
+        lis = ArticulosData.list(filter);
     }
 
     @Override
     public Object getValueAt(int row, int column) {
-        Proveedor d = (Proveedor) lis.get(row);
+        Articulos d = (Articulos) lis.get(row);
         switch (column) {
             case 0:
                 return row + 1;
             case 1:
-                return d.getNombreprov();
+                return d.getNombre();
             case 2:
-                return d.getTelefonopro();
+                return d.getCodigo();
             case 3:
-                return d.getDireccionprov();
+                return iguSDF.format(d.getFecha_ingreso());
+            case 4:
+                return iguSDF.format(d.getFecha_registro()); //return (d.getFecha_ven(); 
             default:
                 return null;
         }
     }
-/*
+
+    /*
     @Override
     public void setValueAt(Object valor, int row, int column) {
-        Proveedor d = (Proveedor) lis.get(row);
+        Articulos d = (Articulos) lis.get(row);
         switch (column) {
             
            // case 0:
@@ -60,20 +68,20 @@ public class ProveedoresTableModel extends AbstractTableModel {
              //   break;
              
             case 1:
-                d.setNombres("" + valor);
+                d.setAsignatura("" + valor);
                 break;
             case 2:
-                d.setInfoadic("" + valor);
+                d.setDetalles("" + valor);
                 break;
 
         }
         this.fireTableRowsUpdated(row, row);
         //fireTableCellUpdated(row, row);
     }
-*/
+     */
     @Override
     public boolean isCellEditable(int row, int column) {
-        //Proveedor c = (Proveedor) lis.get(row);
+        //Articulos c = (Articulos) lis.get(row);
         if (column >= 0 && column != 0) {
             //return true;
         }
@@ -100,7 +108,7 @@ public class ProveedoresTableModel extends AbstractTableModel {
         return columns.length;
     }
 
-    public void addRow(Proveedor d) { // con db no se usa
+    public void addRow(Articulos d) { // con db no se usa
         this.lis.add(d);
         //this.fireTableDataChanged();
         this.fireTableRowsInserted(lis.size(), lis.size());

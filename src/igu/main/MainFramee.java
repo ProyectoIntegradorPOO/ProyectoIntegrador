@@ -6,7 +6,9 @@
 package igu.main;
 
 import igu.administracion.AdmiPanel;
-import igu.articles.ArticlesPanel;
+
+import igu.articles.ArticlessPanel;
+import igu.articles.TareaPanel;
 import igu.cliente.ClientesPanel;
 import igu.compras.panels.ComprasPanel;
 import igu.home.HomePanel;
@@ -15,7 +17,6 @@ import igu.util.ManipulateComponents;
 import igu.ventas.VentasMainPanel;
 import java.awt.Color;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
 /**
@@ -561,7 +562,7 @@ public class MainFramee extends javax.swing.JFrame {
 
     private void theButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton3ActionPerformed
         // TODO add your handling code here:
-        new ChangePanel(mainWorkPanel,  new ArticlesPanel());
+        new ChangePanel(mainWorkPanel,  new ArticlessPanel());
     }//GEN-LAST:event_theButton3ActionPerformed
 
     private void theButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton5ActionPerformed

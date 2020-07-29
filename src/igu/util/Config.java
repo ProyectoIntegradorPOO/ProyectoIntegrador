@@ -18,7 +18,7 @@ public class Config {
     public static final String DEFAULT_DECIMAL_STRING_FORMAT = "#,##0.00";
     public static final String DEFAULT_DECIMAL_FORMAT = "###0.00";
     
-    //https://www.baeldung.com/java-check-string-number
+    
     private static Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
 
     public static boolean isNumeric(String strNum) {
