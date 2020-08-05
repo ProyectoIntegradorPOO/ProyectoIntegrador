@@ -39,6 +39,10 @@ public class ArticlessTableModel extends AbstractTableModel {
     public ArticlessTableModel(String filter) {
         lis = ArticulosData.list(filter);
     }
+    public ArticlessTableModel(Articulos d){
+        this.lis = ArticulosData.listArticlesById(d.getId());
+        this.lis.add(new Articulos());
+    }
 
     @Override
     public Object getValueAt(int row, int column) {

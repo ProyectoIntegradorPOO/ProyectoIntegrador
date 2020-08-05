@@ -21,6 +21,17 @@ public class Articulos {
     private Date fecha_ingreso;
     private Date fecha_registro;
     private String descripcion;
+    
+    public Articulos(){
+        
+    }
+    
+    public Articulos(String nombre){
+        this.nombre=nombre;
+    }
+      public String toString() {
+        return nombre;
+    }
 
     public Date getFecha_registro() {
         return fecha_registro;

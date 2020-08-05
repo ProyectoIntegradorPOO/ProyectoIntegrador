@@ -104,6 +104,12 @@ public class ArticulosData {
         }
         return comit;
     }
+     public static List<Articulos> listCmb(String filter) {
+        List<Articulos> ls = new ArrayList();
+        ls.add(new Articulos("Seleccione artículo..."));
+        ls.addAll(list(filter));
+        return ls;
+    }
 
     public static List<Articulos> list(String filter) {
         String filtert = null;
@@ -146,7 +152,7 @@ public class ArticulosData {
                     d.setFecha_ingreso(date);
                     
                     d.setFecha_registro(sdf.parse(rs.getString("fecha_registro")));
-                   // System.out.println("list.date_created:" + rs.getString("date_created"));
+                   // System.out.println("list.fecha_ingreso:" + rs.getString("fecha_ingreso"));
                 } catch (Exception e) {
                 }
                 ls.add(d);
@@ -154,6 +160,39 @@ public class ArticulosData {
             }
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "list", ex);
+        }
+        return ls;
+    }
+    public static List<Articulos> listArticlesById(int idart){
+        System.out.println("listById.idart:" + idart);
+        String sql = "";
+        List<Articulos> ls = new ArrayList<Articulos>();
+
+        sql = " SELECT * FROM articulos "
+                + " WHERE idart = " + idart 
+                + " ORDER BY idart ";
+
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Articulos d = new Articulos();
+                d.setId(rs.getInt("idart"));
+                try {
+                    d.setFecha_ingreso(sdf.parse(rs.getString("fecha_ingreso")));
+                    d.setFecha_registro(sdf.parse(rs.getString("fecha_registro")));
+                } catch (Exception e) {
+                }
+
+                d.setId(rs.getInt("idart"));
+                d.setNombre(rs.getString("nombre"));
+                d.setCodigo(rs.getString("codigo"));
+
+                d.setCantidad_producto(rs.getDouble("cantidad_producto"));
+                ls.add(d);
+            }
+        } catch (SQLException ex) {
+            log.log(Level.SEVERE, "listByCliente", ex);
         }
         return ls;
     }
@@ -190,6 +229,43 @@ public class ArticulosData {
         }
         return d;
     }
+    
+    public static Articulos ContarPorNombre(String nombre) {
+        Articulos d = new Articulos();
+
+            String sql = "SELECT * FROM articulos WHERE nombre = ? ";
+        int i = 0;
+        try {
+            ps = cn.prepareStatement(sql);
+            ps.setString(++i, nombre);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                d.setId(rs.getInt("idart"));
+                d.setNombre(rs.getString("nombre"));
+                d.setCodigo(rs.getString("codigo"));
+                d.setCantidad_producto(rs.getDouble("cantidad_producto"));
+                d.setTipo_producto(rs.getString("tipo_producto"));
+                d.setPrecio_unidario(rs.getDouble("precio_unidario"));
+               
+                String fecha = rs.getString("fecha_ingreso");
+                try {
+                    Date date = sdf.parse(fecha);
+                    d.setFecha_ingreso(date);
+                    
+                    d.setFecha_registro(sdf.parse(rs.getString("fecha_registroS")));
+                } catch (Exception e) {
+                }
+                
+            }
+        } catch (SQLException ex) {
+            log.log(Level.SEVERE, "getByPId", ex);
+        }
+        return d;
+    }
+    
+    
+    
+    
     /*
     public static void iniciarTransaccion() {
         try {
