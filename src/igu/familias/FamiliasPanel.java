@@ -23,7 +23,7 @@ public class FamiliasPanel extends javax.swing.JPanel {
         initComponents();
         //table.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
         //table.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
-        table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        tablefamily.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resetForm();
         paintTable(clientesTableModel);
     }
@@ -36,24 +36,37 @@ public class FamiliasPanel extends javax.swing.JPanel {
 
     private void paintTable(FamiliasTableModel tableModel) {
         this.clientesTableModel = tableModel;
-        table.setModel(tableModel);
-        table.getColumnModel().getColumn(0).setMaxWidth(35);
+        tablefamily.setModel(tableModel);
+        tablefamily.getColumnModel().getColumn(0).setMaxWidth(35);
         //table.getColumnModel().getColumn(0).setCellRenderer(new TableCellFormatter(null)); //TableCellFormatter("#,##0.0000")
     }
 
     private void paintForm() {
-        if (table.getSelectedRow() != -1) {
-            familiaArticulos filax = (familiaArticulos) clientesTableModel.getRow(table.getSelectedRow());
+        if (tablefamily.getSelectedRow() != -1) {
+            familiaArticulos filax = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
             familiaArticulos d = familiaData.getByPId(filax.getId());
+            
             nombres.setText(d.getNombreFamilia());
             infoadic.setText(d.getDescripcion());
-            System.out.printf("getId:%d getSelectedRow:%d \n", d.getId(), table.getSelectedRow());
+            System.out.printf("getId:%d getSelectedRow:%d \n", d.getId(), tablefamily.getSelectedRow());
            
             guardarButton.setText("MODIFICAR");
             guardarButton.setToolTipText("MODIFICAR");
         }
 
     }
+    /*familiaArticulos filaxx = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
+    familiaArticulos r = familiaData.getByPId(filaxx.getId());
+    private  int indexselected=r.getId();
+
+    public int getIndexselected() {
+        return indexselected;
+    }
+
+    public void setIndexselected(int indexselected) {
+        this.indexselected = indexselected;
+    }*/
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,7 +97,7 @@ public class FamiliasPanel extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        tablefamily = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         theButton4 = new igu.util.buttons.TheButton();
@@ -209,8 +222,8 @@ public class FamiliasPanel extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -248,8 +261,8 @@ public class FamiliasPanel extends javax.swing.JPanel {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        tablefamily.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tablefamily.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -260,20 +273,20 @@ public class FamiliasPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        table.setDoubleBuffered(true);
-        table.setRowHeight(26);
-        table.getTableHeader().setReorderingAllowed(false);
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablefamily.setDoubleBuffered(true);
+        tablefamily.setRowHeight(26);
+        tablefamily.getTableHeader().setReorderingAllowed(false);
+        tablefamily.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
+                tablefamilyMouseClicked(evt);
             }
         });
-        table.addKeyListener(new java.awt.event.KeyAdapter() {
+        tablefamily.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                tableKeyReleased(evt);
+                tablefamilyKeyReleased(evt);
             }
         });
-        jScrollPane3.setViewportView(table);
+        jScrollPane3.setViewportView(tablefamily);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -412,9 +425,9 @@ public class FamiliasPanel extends javax.swing.JPanel {
             familiaArticulos s = new familiaArticulos();
             s.setNombreFamilia(nombres.getText());
             s.setDescripcion(infoadic.getText());
-            if (table.getSelectedRow() != -1) {// ha seleccionado, update
+            if (tablefamily.getSelectedRow() != -1) {// ha seleccionado, update
                 try {
-                    familiaArticulos fila = (familiaArticulos) clientesTableModel.getRow(table.getSelectedRow());
+                    familiaArticulos fila = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
                     s.setId(fila.getId());
                     System.out.println("id:" + s.getId());
                     if (s.getId() > 0) {
@@ -445,32 +458,32 @@ public class FamiliasPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+    private void tablefamilyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablefamilyMouseClicked
         // TODO add your handling code here:
         paintForm();
-    }//GEN-LAST:event_tableMouseClicked
+    }//GEN-LAST:event_tablefamilyMouseClicked
 
-    private void tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyReleased
+    private void tablefamilyKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tablefamilyKeyReleased
         // TODO add your handling code here:
         paintForm();
-    }//GEN-LAST:event_tableKeyReleased
+    }//GEN-LAST:event_tablefamilyKeyReleased
 
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
         // TODO add your handling code here:
         resetForm();
-        table.clearSelection();
+        tablefamily.clearSelection();
         guardarButton.setText("REGISTRAR");
         guardarButton.setToolTipText("REGISTRAR");
     }//GEN-LAST:event_nuevoButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         // TODO add your handling code here:
-        if (table.getSelectedRow() != -1) {
+        if (tablefamily.getSelectedRow() != -1) {
             try {
                 int opc = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar?", "Quitar", JOptionPane.YES_NO_OPTION);
                 if (opc == JOptionPane.OK_OPTION) {
-                    familiaArticulos fila = (familiaArticulos) clientesTableModel.getRow(table.getSelectedRow());
-                    System.out.printf("eliminarButtonActionPerformed getId:%d getSelectedRow:%d \n", fila.getId(), table.getSelectedRow());
+                    familiaArticulos fila = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
+                    System.out.printf("eliminarButtonActionPerformed getId:%d getSelectedRow:%d \n", fila.getId(), tablefamily.getSelectedRow());
 
                     int opcion = familiaData.delete(fila.getId());
                     if (opcion != 0) {
@@ -500,7 +513,7 @@ public class FamiliasPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             ExportarExcel obj = new ExportarExcel();
-            obj.exportarExcel(table);
+            obj.exportarExcel(tablefamily);
         } catch (IOException ex) {
             ErrorLogger.log(Level.SEVERE, FamiliasPanel.class.getName() + ".ExportarExcel", ex);
             //Logger.getLogger(ClientesPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -534,7 +547,7 @@ public class FamiliasPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField nombres;
     private igu.util.buttons.TheButton nuevoButton;
-    private javax.swing.JTable table;
+    public static javax.swing.JTable tablefamily;
     private igu.util.buttons.TheButton theButton4;
     // End of variables declaration//GEN-END:variables
 }

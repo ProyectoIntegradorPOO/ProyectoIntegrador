@@ -6,6 +6,7 @@ import data.familiaData;
 import entities.Articulos;
 
 import entities.familiaArticulos;
+import igu.familias.FamiliasPanel;
 import igu.util.tables.ExportarExcel;
 
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
 
     ArticlessTableModel articlesTableModel = new ArticlessTableModel();
     private familiaArticulos familiaSelected;
+    private Articulos articuloSelected;
      private List<familiaArticulos> familias;
     private DefaultComboBoxModel familiasComboxModel;
 
@@ -38,8 +40,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
         
         familias = familiaData.listCmb("");
         familiasComboxModel = new DefaultComboBoxModel(familias.toArray());
-
-        familiesCombo.setModel(familiasComboxModel);
+        
         paintTable(articlesTableModel);
     }
 
@@ -63,12 +64,28 @@ public class ArticlessPanel extends javax.swing.JPanel {
     private void paintForm() {
         if (articlesTable.getSelectedRow() != -1) {
             Articulos filax = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
+            //familiaArticulos filaa=(familiaArticulos) FamiliasPanel.tablefamily.getSelectedRow();
+            familiaArticulos f= new familiaArticulos();
             Articulos d = ArticulosData.getByPId(filax.getId());
             nombretxt.setText(d.getNombre());
             codigotxt.setText(d.getCodigo());
             cantidadtxt.setText(d.getCantidad_producto().toString());
-            
+            /*int index=0;
+            if(d.getTipo_producto().equalsIgnoreCase("Construccion-madera")){
+                index=1;
+            }else if(d.getTipo_producto().equalsIgnoreCase("Pinturas y complementos")){
+                index=2;
+            }else if(d.getTipo_producto().equalsIgnoreCase("Protección y vestuario")){
+                index=3;
+            }*/
+            //familiesCombo.setSelectedItem(d.getTipo_producto());
+           // familiesCombo.setSelectedItem(d);
+            //familiesCombo.setSelectedIndex(familiaSelected.getId());
             preciotxt.setText(d.getPrecio_unidario().toString());
+           // familiaSelected=familias.get(1);
+        
+       // familiesCombo.setModel(familiasComboxModel);
+        //familiesCombo.getModel().setSelectedItem(d);
             
             descripciontxt.setText(d.getDescripcion());
             fechatxt.setDate(d.getFecha_ingreso());
@@ -663,7 +680,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         ArticlessTableModel tableModel = new ArticlessTableModel(buscarField.getText());
         paintTable(tableModel);
-
+        
     }//GEN-LAST:event_buscarFieldKeyReleased
 
     private void theButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton4ActionPerformed
@@ -697,7 +714,9 @@ public class ArticlessPanel extends javax.swing.JPanel {
             
             int id = familiaSelected.getId();
             if(id>0){
-            List<familiaArticulos> familiaDeArticulos = familiaData.listFamilysById(id);
+            List<Articulos> articulos = ArticulosData.listArticlesById(id);
+            
+             familiaDeArticulos = familiaData.listFamilysById(id);
             //int articuloId = comprasDelCliente.get(0).getId();
             //familiaSelected = ArticulosData.getByPId(articuloId);
              System.out.println(id);
@@ -761,4 +780,5 @@ public class ArticlessPanel extends javax.swing.JPanel {
     private javax.swing.JTextField preciotxt;
     private igu.util.buttons.TheButton theButton4;
     // End of variables declaration//GEN-END:variables
+ private List<familiaArticulos> familiaDeArticulos;
 }

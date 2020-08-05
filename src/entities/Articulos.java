@@ -29,7 +29,7 @@ public class Articulos {
     public Articulos(String nombre){
         this.nombre=nombre;
     }
-      public String toString() {
+     public String toString() {
         return nombre;
     }
 

@@ -1,6 +1,7 @@
 package data;
 
 import entities.Articulos;
+import entities.familiaArticulos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -160,6 +161,31 @@ public class ArticulosData {
             }
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "list", ex);
+        }
+        return ls;
+    }
+     public static List<familiaArticulos> listActivesByFamily(int id) {
+        System.out.println("listByCliente.clie_id:" + id);
+        String sql = "";
+        List<familiaArticulos> ls = new ArrayList<familiaArticulos>();
+
+        sql = " SELECT * FROM familiaArticulos "
+                + " WHERE id = " + id 
+                + " ORDER BY id ";
+
+        try {
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                Articulos d = new Articulos();
+                familiaArticulos f=new familiaArticulos();
+                d.setId(rs.getInt("id"));
+                f.setId(rs.getInt("id"));
+               
+                ls.add(f);
+            }
+        } catch (SQLException ex) {
+            log.log(Level.SEVERE, "listByCliente", ex);
         }
         return ls;
     }
