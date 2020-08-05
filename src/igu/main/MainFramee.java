@@ -11,6 +11,7 @@ import igu.articles.ArticlessPanel;
 import igu.articles.TareaPanel;
 import igu.cliente.ClientesPanel;
 import igu.compras.panels.ComprasPanel;
+import igu.familias.FamiliasPanel;
 import igu.home.HomePanel;
 import igu.proveedor.ProveedoresPanel;
 import igu.util.ManipulateComponents;
@@ -572,7 +573,7 @@ public class MainFramee extends javax.swing.JFrame {
 
     private void theButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton4ActionPerformed
         // TODO add your handling code here:
-        new ChangePanel(mainWorkPanel,  new VentasMainPanel());
+        new ChangePanel(mainWorkPanel,  new FamiliasPanel());
     }//GEN-LAST:event_theButton4ActionPerformed
 
     private void theButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton7ActionPerformed
