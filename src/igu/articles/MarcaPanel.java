@@ -1,12 +1,8 @@
 package igu.articles;
 
-
-import data.ArticulosData;
-import data.familiaData;
-import entities.Articulos;
-
-import entities.familiaArticulos;
-import igu.familias.FamiliasPanel;
+import igu.articles.*;
+import data.MarcaData;
+import entities.Marca;
 import igu.util.tables.ExportarExcel;
 
 import java.io.IOException;
@@ -14,73 +10,44 @@ import java.util.logging.Level;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import igu.util.ErrorLogger;
-import java.awt.event.ItemEvent;
-import java.util.Date;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Asullom
  */
-public class ArticlessPanel extends javax.swing.JPanel {
+public class MarcaPanel extends javax.swing.JPanel {
 
-    ArticlessTableModel articlesTableModel = new ArticlessTableModel();
-    private familiaArticulos familiaSelected;
-    private Articulos articuloSelected;
-     private List<familiaArticulos> familias;
-    private DefaultComboBoxModel familiasComboxModel;
+    MarcaTableModel marcasTableModel = new MarcaTableModel();
 
-    public ArticlessPanel() {
+    public MarcaPanel() {
         initComponents();
         //table.getTableHeader().setDefaultRenderer(new EstiloTablaHeader());
         //table.setDefaultRenderer(Object.class, new EstiloTablaRenderer());
-        articlesTable.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        table.getSelectionModel().setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         resetForm();
-        
-        familias = familiaData.listCmb("");
-        familiasComboxModel = new DefaultComboBoxModel(familias.toArray());
-        familiesCombo.setModel(familiasComboxModel);
-        paintTable(articlesTableModel);
+        paintTable(marcasTableModel);
     }
 
     private void resetForm() {
-        nombretxt.requestFocus();
-        codigotxt.setText("");
-        cantidadtxt.setText("");
-        
-        preciotxt.setText("");
-        //fechatxt.setTime(new Date());
-        descripciontxt.setText("");
+        nombres.requestFocus();
+        nombres.setText("");
+        infoadic.setText("");
     }
 
-    private void paintTable(ArticlessTableModel tableModel) {
-        this.articlesTableModel = tableModel;
-        articlesTable.setModel(tableModel);
-        articlesTable.getColumnModel().getColumn(0).setMaxWidth(35);
+    private void paintTable(MarcaTableModel tableModel) {
+        this.marcasTableModel = tableModel;
+        table.setModel(tableModel);
+        table.getColumnModel().getColumn(0).setMaxWidth(35);
         //table.getColumnModel().getColumn(0).setCellRenderer(new TableCellFormatter(null)); //TableCellFormatter("#,##0.0000")
     }
 
     private void paintForm() {
-        if (articlesTable.getSelectedRow() != -1) {
-            Articulos filax = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
-            //familiaArticulos filaa=(familiaArticulos) FamiliasPanel.tablefamily.getSelectedRow();
-            //familiaArticulos f= new familiaArticulos();
-            Articulos d = ArticulosData.getByPId(filax.getIdart());
-            nombretxt.setText(d.getNombre());
-            codigotxt.setText(d.getCodigo());
-            cantidadtxt.setText(d.getCantidad_producto().toString());
-            //System.out.println(d.getFam_id());
-            familiesCombo.setSelectedItem(d);
-            familiesCombo.setSelectedIndex(d.getFam_id());
-            preciotxt.setText(d.getPrecio_unidario().toString());
-           // familiaSelected=familias.get(1);
-        
-       // familiesCombo.setModel(familiasComboxModel);
-        //familiesCombo.getModel().setSelectedItem(d);
-            
-            descripciontxt.setText(d.getDescripcion());
-            fechatxt.setDate(d.getFecha_ingreso());
+        if (table.getSelectedRow() != -1) {
+            Marca filax = (Marca) marcasTableModel.getRow(table.getSelectedRow());
+            Marca d = MarcaData.getByPId(filax.getIdMarca());
+            nombres.setText(d.getNomMarca());
+            infoadic.setText(d.getDescripcion());
+            System.out.printf("getIdMarca:%d getSelectedRow:%d \n", d.getIdMarca(), table.getSelectedRow());
            
             guardarButton.setText("MODIFICAR");
             guardarButton.setToolTipText("MODIFICAR");
@@ -100,8 +67,6 @@ public class ArticlessPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
@@ -110,27 +75,16 @@ public class ArticlessPanel extends javax.swing.JPanel {
         eliminarButton = new igu.util.buttons.TheButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        calcButton = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        nombretxt = new javax.swing.JTextField();
+        nombres = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        descripciontxt = new javax.swing.JTextArea();
-        jLabel8 = new javax.swing.JLabel();
-        codigotxt = new javax.swing.JTextField();
-        cantidadtxt = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        preciotxt = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        fechatxt = new com.toedter.calendar.JDateChooser();
-        familiesCombo = new javax.swing.JComboBox();
+        infoadic = new javax.swing.JTextArea();
         jPanel5 = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        articlesTable = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jPanel10 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         theButton4 = new igu.util.buttons.TheButton();
@@ -143,16 +97,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        jLabel1.setText("ARTÍCULOS");
-
-        jButton1.setText("adelante");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jLabel1.setText("MARCAS");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -161,25 +106,14 @@ public class ArticlessPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(252, 252, 252)
-                .addComponent(jButton1)
-                .addGap(83, 83, 83))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         nuevoButton.setText("NUEVO");
@@ -230,21 +164,12 @@ public class ArticlessPanel extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel5.setText("jLabel5");
 
-        calcButton.setText("contar");
-        calcButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                calcButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addComponent(calcButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
                 .addContainerGap())
         );
@@ -252,62 +177,31 @@ public class ArticlessPanel extends javax.swing.JPanel {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(calcButton))
+                .addComponent(jLabel5)
                 .addContainerGap())
         );
 
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Nombre:");
+        jLabel2.setText("MARCA");
 
-        nombretxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        nombretxt.addActionListener(new java.awt.event.ActionListener() {
+        nombres.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        nombres.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombretxtActionPerformed(evt);
+                nombresActionPerformed(evt);
             }
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Descripcion:");
+        jLabel3.setText("Descripcion");
 
         jScrollPane2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
-        descripciontxt.setColumns(20);
-        descripciontxt.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        descripciontxt.setRows(5);
-        jScrollPane2.setViewportView(descripciontxt);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel8.setText("Codigo:");
-
-        codigotxt.setEditable(false);
-        codigotxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        cantidadtxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Cantidad producto:");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Tipo producto:");
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel11.setText("Precio unidario:");
-
-        preciotxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel12.setText("Fecha ingreso:");
-
-        familiesCombo.setMaximumRowCount(100000);
-        familiesCombo.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                familiesComboItemStateChanged(evt);
-            }
-        });
+        infoadic.setColumns(20);
+        infoadic.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        infoadic.setRows(5);
+        jScrollPane2.setViewportView(infoadic);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -316,39 +210,13 @@ public class ArticlessPanel extends javax.swing.JPanel {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel9)
-                                    .addComponent(jLabel12))
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(cantidadtxt, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                                                .addComponent(codigotxt)
-                                                .addComponent(preciotxt))))
-                                    .addGroup(jPanel8Layout.createSequentialGroup()
-                                        .addGap(5, 5, 5)
-                                        .addComponent(fechatxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(familiesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel11))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(36, 36, 36)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addGap(34, 34, 34)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -356,39 +224,12 @@ public class ArticlessPanel extends javax.swing.JPanel {
                 .addGap(28, 28, 28)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(codigotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantidadtxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(nombres, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(familiesCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(preciotxt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(fechatxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(67, 67, 67))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))))
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(171, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -412,8 +253,8 @@ public class ArticlessPanel extends javax.swing.JPanel {
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        articlesTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        articlesTable.setModel(new javax.swing.table.DefaultTableModel(
+        table.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -424,20 +265,20 @@ public class ArticlessPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        articlesTable.setDoubleBuffered(true);
-        articlesTable.setRowHeight(26);
-        articlesTable.getTableHeader().setReorderingAllowed(false);
-        articlesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        table.setDoubleBuffered(true);
+        table.setRowHeight(26);
+        table.getTableHeader().setReorderingAllowed(false);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                articlesTableMouseClicked(evt);
+                tableMouseClicked(evt);
             }
         });
-        articlesTable.addKeyListener(new java.awt.event.KeyAdapter() {
+        table.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                articlesTableKeyReleased(evt);
+                tableKeyReleased(evt);
             }
         });
-        jScrollPane3.setViewportView(articlesTable);
+        jScrollPane3.setViewportView(table);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -451,7 +292,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
         );
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -570,37 +411,21 @@ public class ArticlessPanel extends javax.swing.JPanel {
 
     private void guardarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarButtonActionPerformed
         // TODO add your handling code here:
-        if (this.nombretxt.getText().equals("")) {
+        if (this.nombres.getText().equals("")) {
             System.err.println("Nombre es requerido");
-        
-        }
-        else if(familiaSelected==null){
-            System.err.println("Seleccione una familia");
-        }
-        else {
-            Articulos s = new Articulos();
-            s.setFam_id(familiaSelected.getIdfam());
-            s.setNombre(nombretxt.getText());
-            s.setCodigo(codigotxt.getText());
-            s.setCantidad_producto(Double.parseDouble(cantidadtxt.getText()));
-            s.setTipo_producto(familiaSelected.getNombreFamilia());
-            s.setPrecio_unidario(Double.parseDouble(preciotxt.getText()));
-            
-            s.setDescripcion(descripciontxt.getText());
-             if (fechatxt.getDate() == null) {
-                fechatxt.setDate(new Date());
-            }
-            s.setFecha_ingreso(fechatxt.getDate());
-            
-            if (articlesTable.getSelectedRow() != -1) {// ha seleccionado, update
+        } else {
+            Marca s = new Marca();
+            s.setNomMarca(nombres.getText());
+            s.setDescripcion(infoadic.getText());
+            if (table.getSelectedRow() != -1) {// ha seleccionado, update
                 try {
-                    Articulos fila = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
-                    s.setIdart(fila.getIdart());
-                    System.out.println("id:" + s.getIdart());
-                    if (s.getIdart() > 0) {
-                        int returnId = ArticulosData.update(s);
+                    Marca fila = (Marca) marcasTableModel.getRow(table.getSelectedRow());
+                    s.setIdMarca(fila.getIdMarca());
+                    System.out.println("id:" + s.getIdMarca());
+                    if (s.getIdMarca() > 0) {
+                        int returnId = MarcaData.update(s);
                         if (returnId != 0) {
-                            paintTable(new ArticlessTableModel());
+                            paintTable(new MarcaTableModel());
                             resetForm();
                             System.out.println("si modificado: " + returnId);
                         }
@@ -610,9 +435,9 @@ public class ArticlessPanel extends javax.swing.JPanel {
                 }
             } else { // sin seleccionar, insert
                 try {
-                    int returnId = ArticulosData.create(s);
+                    int returnId = MarcaData.create(s);
                     if (returnId != 0) {
-                        paintTable(new ArticlessTableModel());
+                        paintTable(new MarcaTableModel());
                         // s.setIdcliente(returnId);//necesitamos subir el id, ya no
                         //tableModel.addRow(s);
                         resetForm();
@@ -625,37 +450,37 @@ public class ArticlessPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_guardarButtonActionPerformed
 
-    private void articlesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_articlesTableMouseClicked
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
         // TODO add your handling code here:
         paintForm();
-    }//GEN-LAST:event_articlesTableMouseClicked
+    }//GEN-LAST:event_tableMouseClicked
 
-    private void articlesTableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_articlesTableKeyReleased
+    private void tableKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tableKeyReleased
         // TODO add your handling code here:
         paintForm();
-    }//GEN-LAST:event_articlesTableKeyReleased
+    }//GEN-LAST:event_tableKeyReleased
 
     private void nuevoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoButtonActionPerformed
         // TODO add your handling code here:
         resetForm();
-        articlesTable.clearSelection();
+        table.clearSelection();
         guardarButton.setText("REGISTRAR");
         guardarButton.setToolTipText("REGISTRAR");
     }//GEN-LAST:event_nuevoButtonActionPerformed
 
     private void eliminarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarButtonActionPerformed
         // TODO add your handling code here:
-        if (articlesTable.getSelectedRow() != -1) {
+        if (table.getSelectedRow() != -1) {
             try {
                 int opc = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar?", "Quitar", JOptionPane.YES_NO_OPTION);
                 if (opc == JOptionPane.OK_OPTION) {
-                    Articulos fila = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
-                    
+                    Marca fila = (Marca) marcasTableModel.getRow(table.getSelectedRow());
+                    System.out.printf("eliminarButtonActionPerformed getIdMarca:%d getSelectedRow:%d \n", fila.getIdMarca(), table.getSelectedRow());
 
-                    int opcion = ArticulosData.delete(fila.getIdart());
+                    int opcion = MarcaData.delete(fila.getIdMarca());
                     if (opcion != 0) {
                         //tableModel.removeRow(table.getSelectedRow());
-                        paintTable(new ArticlessTableModel());
+                        paintTable(new MarcaTableModel());
                         resetForm();
                         guardarButton.setText("REGISTRAR");
                         guardarButton.setToolTipText("REGISTRAR");
@@ -671,92 +496,39 @@ public class ArticlessPanel extends javax.swing.JPanel {
 
     private void buscarFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscarFieldKeyReleased
         // TODO add your handling code here:
-        ArticlessTableModel tableModel = new ArticlessTableModel(buscarField.getText());
+        MarcaTableModel tableModel = new MarcaTableModel(buscarField.getText());
         paintTable(tableModel);
-        
+
     }//GEN-LAST:event_buscarFieldKeyReleased
 
     private void theButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton4ActionPerformed
         // TODO add your handling code here:
         try {
             ExportarExcel obj = new ExportarExcel();
-            obj.exportarExcel(articlesTable);
+            obj.exportarExcel(table);
         } catch (IOException ex) {
-            ErrorLogger.log(Level.SEVERE, ArticlessPanel.class.getName() + ".ExportarExcel", ex);
-            //Logger.getLogger(ArticulossPanel.class.getName()).log(Level.SEVERE, null, ex);
+            ErrorLogger.log(Level.SEVERE, MarcaPanel.class.getName() + ".ExportarExcel", ex);
+            //Logger.getLogger(ClientesPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_theButton4ActionPerformed
 
-    private void nombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombretxtActionPerformed
+    private void nombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombresActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombretxtActionPerformed
-
-    private void calcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_calcButtonActionPerformed
-        // TODO add your handling code here:
-        Articulos a=ArticulosData.ContarPorNombre("martillo");
-        System.out.println(a.getCantidad_producto());
-        
-    }//GEN-LAST:event_calcButtonActionPerformed
-
-    private void familiesComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_familiesComboItemStateChanged
-         familiaSelected = null;
-        
-        if (evt.getStateChange() == ItemEvent.SELECTED) {
-            
-            familiaSelected = (familiaArticulos) familiesCombo.getSelectedItem();
-            
-            int id = familiaSelected.getIdfam();
-            if(id>0){
-            List<Articulos> articulos = ArticulosData.listActivesByFamily(familiaSelected.getIdfam());
-            //articuloSelected=ArticulosData.getByPId(articulos.get(0).getIdart());
-            //familiaDeArticulos = familiaData.listFamilysById(id);
-//            int idart=articulos.get(0).getFam_id();
-            //int articuloId = comprasDelCliente.get(0).getIdart();
-             //articuloSelected = ArticulosData.getByPId(idart);
-             //System.out.println(id);
-            }else{
-               familiaSelected=null;
-               //System.out.println("seleccione una familia");
-            }
-            //    this.setProveedor(prv);
-        }
-        
-        //tableHandlerEvent();
-    }//GEN-LAST:event_familiesComboItemStateChanged
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if (familiaSelected != null){
-           // paintTable(new ArticlessTableModel(familiaSelected));
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_nombresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable articlesTable;
     private javax.swing.JTextField buscarField;
-    private javax.swing.JButton calcButton;
-    private javax.swing.JTextField cantidadtxt;
-    private javax.swing.JTextField codigotxt;
-    private javax.swing.JTextArea descripciontxt;
     private igu.util.buttons.TheButton eliminarButton;
-    private javax.swing.JComboBox familiesCombo;
-    private com.toedter.calendar.JDateChooser fechatxt;
     private igu.util.buttons.TheButton guardarButton;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JTextArea infoadic;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
@@ -769,10 +541,9 @@ public class ArticlessPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField nombretxt;
+    private javax.swing.JTextField nombres;
     private igu.util.buttons.TheButton nuevoButton;
-    private javax.swing.JTextField preciotxt;
+    private javax.swing.JTable table;
     private igu.util.buttons.TheButton theButton4;
     // End of variables declaration//GEN-END:variables
- private List<familiaArticulos> familiaDeArticulos;
 }

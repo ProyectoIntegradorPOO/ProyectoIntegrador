@@ -1,12 +1,13 @@
 package igu.articles;
 
-import data.ArticulosData;
-import entities.Articulos;
-import igu.util.Config;
-import java.text.SimpleDateFormat;
-import java.text.DateFormat;
+
+import data.ProductoData;
+
+import entities.Producto;
+
+
 import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -14,63 +15,46 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Asullom
  */
-public class ArticlessTableModel extends AbstractTableModel {
+public class ProductosTablesModel extends AbstractTableModel {
 
-    private List<Articulos> lis = new ArrayList();
-    private String[] columns = {"#", "nombre", "codigo", "cantidad_producto","tipo_producto","precio_unidario","descripcion", "fecha_ingreso"};
-    private Class[] columnsType = {Integer.class, String.class, String.class, Double.class, String.class,Double.class, String.class, Date.class };
+    private List<Producto> lis = new ArrayList();
+    private String[] columns = {"#", "nombre", "idmarca", "marca","precio"};
+    private Class[] columnsType = {Integer.class, String.class, Integer.class, String.class, Double.class, };
     
-    SimpleDateFormat iguSDF = new SimpleDateFormat(Config.DEFAULT_DATE_STRING_FORMAT_PE);
+   
     
-    private  String DEFAULT_DATE_STRING_FORMAT_PE = "dd/MM/yyyy";
-    private  String DEFAULT_DATE_STRING_FORMAT_PE_L = "dd/MM/yyyy HH:mm:ss.SSS";
-    
-    //SimpleDateFormat iguSDF = new SimpleDateFormat(Config.DEFAULT_DATE_STRING_FORMAT_PE);
-    SimpleDateFormat iguSDFf = new SimpleDateFormat(DEFAULT_DATE_STRING_FORMAT_PE);
-    
-    SimpleDateFormat iguSDFff = new SimpleDateFormat();
+   
     
     
     
-    public ArticlessTableModel() {
-        lis = ArticulosData.list("");
+    public ProductosTablesModel() {
+        lis = ProductoData.list("");
     }
 
-    public ArticlessTableModel(String filter) {
-        lis = ArticulosData.list(filter);
+    public ProductosTablesModel(String filter) {
+        lis = ProductoData.list(filter);
     }
-    /*public ArticlessTableModel(Articulos d){
-        this.lis = ArticulosData.listArticlesById(d.getIdart());
-        this.lis.add(new Articulos());
+    /*public ProductosTablesModel(Producto d){
+        this.lis = ProductoData.listArticlesById(d.getIdProducto());
+        this.lis.add(new Producto());
     }*/
 
     @Override
     public Object getValueAt(int row, int column) {
-        Articulos d = (Articulos) lis.get(row);
+        Producto d = (Producto) lis.get(row);
         //String fecha=iguSDFff.format(d.getFecha_ingreso());
         switch (column) {
             case 0:
                 return row + 1;
             case 1:
-                return d.getNombre();
+                return d.getNomProducto();
             case 2:
-                return d.getCodigo();
+                return d.getIdMarca();
             case 3:
-                return d.getCantidad_producto();
+                return d.getNomMarca();
             case 4:
-                return d.getTipo_producto();
-            case 5:
-                return d.getPrecio_unidario();
-            
-            case 6:
-                return d.getDescripcion();     
-                
-            case 7:
-                //Date f=d.getFecha_ingreso();
-                //return iguSDF.format(f);
-                return d.getFecha_ingreso();
-                //return iguSDFf.format(d.getFecha_ingreso());
-                //return fecha;
+                return d.getPrecio();
+          
             default:
                 return null;
         }
@@ -134,7 +118,7 @@ public class ArticlessTableModel extends AbstractTableModel {
         return columns.length;
     }
 
-    public void addRow(Articulos d) { // con db no se usa
+    public void addRow(Producto d) { // con db no se usa
         this.lis.add(d);
         //this.fireTableDataChanged();
         this.fireTableRowsInserted(lis.size(), lis.size());

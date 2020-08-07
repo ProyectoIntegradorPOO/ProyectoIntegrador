@@ -8,6 +8,8 @@ package igu.main;
 import igu.administracion.AdmiPanel;
 
 import igu.articles.ArticlessPanel;
+import igu.articles.MarcaPanel;
+import igu.articles.ProductosPanele;
 import igu.articles.TareaPanel;
 import igu.cliente.ClientesPanel;
 import igu.compras.panels.ComprasPanel;
@@ -553,7 +555,7 @@ public class MainFramee extends javax.swing.JFrame {
 
     private void theButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton1ActionPerformed
         // TODO add your handling code here:
-        new ChangePanel(mainWorkPanel,  new ProveedoresPanel());
+        new ChangePanel(mainWorkPanel,  new ProductosPanele());
     }//GEN-LAST:event_theButton1ActionPerformed
 
     private void theButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton2ActionPerformed
@@ -577,7 +579,7 @@ public class MainFramee extends javax.swing.JFrame {
     }//GEN-LAST:event_theButton4ActionPerformed
 
     private void theButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_theButton7ActionPerformed
-        new ChangePanel(mainWorkPanel,  new AdmiPanel());
+        new ChangePanel(mainWorkPanel,  new MarcaPanel());
     }//GEN-LAST:event_theButton7ActionPerformed
 
     private void theButton5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_theButton5MousePressed
