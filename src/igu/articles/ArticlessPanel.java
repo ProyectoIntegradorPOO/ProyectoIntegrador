@@ -40,7 +40,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
         
         familias = familiaData.listCmb("");
         familiasComboxModel = new DefaultComboBoxModel(familias.toArray());
-        
+        familiesCombo.setModel(familiasComboxModel);
         paintTable(articlesTableModel);
     }
 
@@ -65,22 +65,14 @@ public class ArticlessPanel extends javax.swing.JPanel {
         if (articlesTable.getSelectedRow() != -1) {
             Articulos filax = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
             //familiaArticulos filaa=(familiaArticulos) FamiliasPanel.tablefamily.getSelectedRow();
-            familiaArticulos f= new familiaArticulos();
-            Articulos d = ArticulosData.getByPId(filax.getId());
+            //familiaArticulos f= new familiaArticulos();
+            Articulos d = ArticulosData.getByPId(filax.getIdart());
             nombretxt.setText(d.getNombre());
             codigotxt.setText(d.getCodigo());
             cantidadtxt.setText(d.getCantidad_producto().toString());
-            /*int index=0;
-            if(d.getTipo_producto().equalsIgnoreCase("Construccion-madera")){
-                index=1;
-            }else if(d.getTipo_producto().equalsIgnoreCase("Pinturas y complementos")){
-                index=2;
-            }else if(d.getTipo_producto().equalsIgnoreCase("Protección y vestuario")){
-                index=3;
-            }*/
-            //familiesCombo.setSelectedItem(d.getTipo_producto());
-           // familiesCombo.setSelectedItem(d);
-            //familiesCombo.setSelectedIndex(familiaSelected.getId());
+            //System.out.println(d.getFam_id());
+            familiesCombo.setSelectedItem(d);
+            familiesCombo.setSelectedIndex(d.getFam_id());
             preciotxt.setText(d.getPrecio_unidario().toString());
            // familiaSelected=familias.get(1);
         
@@ -310,6 +302,7 @@ public class ArticlessPanel extends javax.swing.JPanel {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Fecha ingreso:");
 
+        familiesCombo.setMaximumRowCount(100000);
         familiesCombo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 familiesComboItemStateChanged(evt);
@@ -586,11 +579,11 @@ public class ArticlessPanel extends javax.swing.JPanel {
         }
         else {
             Articulos s = new Articulos();
-            
+            s.setFam_id(familiaSelected.getIdfam());
             s.setNombre(nombretxt.getText());
             s.setCodigo(codigotxt.getText());
             s.setCantidad_producto(Double.parseDouble(cantidadtxt.getText()));
-            s.setTipo_producto(familiesCombo.getSelectedItem().toString());
+            s.setTipo_producto(familiaSelected.getNombreFamilia());
             s.setPrecio_unidario(Double.parseDouble(preciotxt.getText()));
             
             s.setDescripcion(descripciontxt.getText());
@@ -602,9 +595,9 @@ public class ArticlessPanel extends javax.swing.JPanel {
             if (articlesTable.getSelectedRow() != -1) {// ha seleccionado, update
                 try {
                     Articulos fila = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
-                    s.setId(fila.getId());
-                    System.out.println("id:" + s.getId());
-                    if (s.getId() > 0) {
+                    s.setIdart(fila.getIdart());
+                    
+                    if (s.getIdart() > 0) {
                         int returnId = ArticulosData.update(s);
                         if (returnId != 0) {
                             paintTable(new ArticlessTableModel());
@@ -657,9 +650,9 @@ public class ArticlessPanel extends javax.swing.JPanel {
                 int opc = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar?", "Quitar", JOptionPane.YES_NO_OPTION);
                 if (opc == JOptionPane.OK_OPTION) {
                     Articulos fila = (Articulos) articlesTableModel.getRow(articlesTable.getSelectedRow());
-                    System.out.printf("eliminarButtonActionPerformed getId:%d getSelectedRow:%d \n", fila.getId(), articlesTable.getSelectedRow());
+                    //System.out.printf("eliminarButtonActionPerformed getIdart:%d getSelectedRow:%d \n", fila.getIdart(), articlesTable.getSelectedRow());
 
-                    int opcion = ArticulosData.delete(fila.getId());
+                    int opcion = ArticulosData.delete(fila.getIdart());
                     if (opcion != 0) {
                         //tableModel.removeRow(table.getSelectedRow());
                         paintTable(new ArticlessTableModel());
@@ -712,17 +705,18 @@ public class ArticlessPanel extends javax.swing.JPanel {
             
             familiaSelected = (familiaArticulos) familiesCombo.getSelectedItem();
             
-            int id = familiaSelected.getId();
+            int id = familiaSelected.getIdfam();
             if(id>0){
-            List<Articulos> articulos = ArticulosData.listArticlesById(id);
-            
-             familiaDeArticulos = familiaData.listFamilysById(id);
-            //int articuloId = comprasDelCliente.get(0).getId();
-            //familiaSelected = ArticulosData.getByPId(articuloId);
-             System.out.println(id);
+            List<Articulos> articulos = ArticulosData.listActivesByFamily(familiaSelected.getIdfam());
+            //articuloSelected=ArticulosData.getByPId(articulos.get(0).getIdart());
+            //familiaDeArticulos = familiaData.listFamilysById(id);
+//            int idart=articulos.get(0).getFam_id();
+            //int articuloId = comprasDelCliente.get(0).getIdart();
+             //articuloSelected = ArticulosData.getByPId(idart);
+             //System.out.println(id);
             }else{
                familiaSelected=null;
-               System.out.println("seleccione una familia");
+               //System.out.println("seleccione una familia");
             }
             //    this.setProveedor(prv);
         }

@@ -34,7 +34,7 @@ public class familiaData {
 
     public static int create(familiaArticulos d) {
         int rsId = 0; 
-        String[] returns = {"id"};
+        String[] returns = {"idfam"};
         String sql = "INSERT INTO familiaArticulos(nombre, descripcion) "
                 + "VALUES(?,?)";
         int i = 0;
@@ -46,7 +46,7 @@ public class familiaData {
             rsId = ps.executeUpdate();
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
-                    rsId = rs.getInt(1); // select tk, max(id)  from clientes
+                    rsId = rs.getInt(1); // select tk, max(idfam)  from clientes
                     //System.out.println("rs.getInt(rsId): " + rsId);
                 }
                 rs.close();
@@ -64,14 +64,14 @@ public class familiaData {
                 + "nombre=?, "
                 + "descripcion=? "
                
-                + "WHERE id=?";
+                + "WHERE idfam=?";
         int i = 0;
         try {
             ps = cn.prepareStatement(sql);
             ps.setString(++i, d.getNombreFamilia());
             ps.setString(++i, d.getDescripcion());
             
-            ps.setInt(++i, d.getId());
+            ps.setInt(++i, d.getIdfam());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -79,12 +79,12 @@ public class familiaData {
         return comit;
     }
 
-    public static int delete(int id) throws Exception {
+    public static int delete(int idfam) throws Exception {
         int comit = 0;
-        String sql = "DELETE FROM familiaArticulos WHERE id = ?";
+        String sql = "DELETE FROM familiaArticulos WHERE idfam = ?";
         try {
             ps = cn.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idfam);
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "delete", ex);
@@ -112,11 +112,11 @@ public class familiaData {
         List<familiaArticulos> ls = new ArrayList();
         String sql = "";
         if (filtert.equals("")) {
-            sql = "SELECT * FROM familiaArticulos ORDER BY id";
+            sql = "SELECT * FROM familiaArticulos ORDER BY idfam";
         } else {
-            sql = "SELECT * FROM familiaArticulos WHERE (id LIKE'" + filter + "%' OR "
+            sql = "SELECT * FROM familiaArticulos WHERE (idfam LIKE'" + filter + "%' OR "
                     + "nombre LIKE'" + filter + "%' OR descripcion LIKE'"+ filter+ "%' OR "
-                    + "id LIKE'" + filter + "%') "
+                    + "idfam LIKE'" + filter + "%') "
                     + "ORDER BY nombre";
         }
         try {
@@ -124,7 +124,7 @@ public class familiaData {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 familiaArticulos d = new familiaArticulos();
-                d.setId(rs.getInt("id"));
+                d.setIdfam(rs.getInt("idfam"));
                 d.setNombreFamilia(rs.getString("nombre"));
                 
                
@@ -143,21 +143,21 @@ public class familiaData {
         }
         return ls;
     }
-    public static List<familiaArticulos> listFamilysById(int id){
-        System.out.println("listById.id:" + id);
+    public static List<familiaArticulos> listFamilysById(int idfam){
+        System.out.println("listById.idfam:" + idfam);
         String sql = "";
         List<familiaArticulos> ls = new ArrayList<familiaArticulos>();
 
         sql = " SELECT * FROM familiaArticulos "
-                + " WHERE id = " + id 
-                + " ORDER BY id ";
+                + " WHERE idfam = " + idfam 
+                + " ORDER BY idfam ";
 
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 familiaArticulos d = new familiaArticulos();
-                d.setId(rs.getInt("id"));
+                d.setIdfam(rs.getInt("idfam"));
                 
 
                 
@@ -173,17 +173,17 @@ public class familiaData {
         return ls;
     }
 
-    public static familiaArticulos getByPId(int id) {
+    public static familiaArticulos getByPId(int idfam) {
         familiaArticulos d = new familiaArticulos();
 
-            String sql = "SELECT * FROM familiaArticulos WHERE id = ? ";
+            String sql = "SELECT * FROM familiaArticulos WHERE idfam = ? ";
         int i = 0;
         try {
             ps = cn.prepareStatement(sql);
-            ps.setInt(++i, id);
+            ps.setInt(++i, idfam);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                d.setId(rs.getInt("id"));
+                d.setIdfam(rs.getInt("idfam"));
                 d.setNombreFamilia(rs.getString("nombre"));
                 d.setDescripcion(rs.getString("descripcion"));
                
@@ -205,7 +205,7 @@ public class familiaData {
             ps.setString(++i, nombre);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                d.setId(rs.getInt("id"));
+                d.setIdfam(rs.getInt("idfam"));
                 d.setNombreFamilia(rs.getString("nombre"));
                 d.setDescripcion(rs.getString("descripcion"));
                 

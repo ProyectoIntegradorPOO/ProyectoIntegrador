@@ -10,7 +10,7 @@ package entities;
  * @author jonatan
  */
 public class familiaArticulos {
-    private int id;
+    private int idfam;
     private String nombreFamilia;
     private String descripcion;
     
@@ -26,13 +26,15 @@ public class familiaArticulos {
        return nombreFamilia;
     }
 
-    public int getId() {
-        return id;
+    public int getIdfam() {
+        return idfam;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdfam(int idfam) {
+        this.idfam = idfam;
     }
+
+   
 
     public String getNombreFamilia() {
         return nombreFamilia;

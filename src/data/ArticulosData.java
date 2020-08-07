@@ -31,11 +31,12 @@ public class ArticulosData {
     public static int create(Articulos d) {
         int rsId = 0; 
         String[] returns = {"idart"};
-        String sql = "INSERT INTO articulos(nombre, codigo, cantidad_producto, tipo_producto, precio_unidario,  descripcion, fecha_ingreso, fecha_registro) "
-                + "VALUES(?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO articulos(fam_id, nombre, codigo, cantidad_producto, tipo_producto, precio_unidario,  descripcion, fecha_ingreso, fecha_registro) "
+                + "VALUES(?,?,?,?,?,?,?,?,?)";
         int i = 0;
         try {
             ps = cn.prepareStatement(sql, returns);
+            ps.setInt(++i, d.getFam_id());
             ps.setString(++i, d.getNombre());
             ps.setString(++i, d.getCodigo());
             ps.setDouble(++i, d.getCantidad_producto());
@@ -63,6 +64,7 @@ public class ArticulosData {
         
         int comit = 0;
         String sql = "UPDATE articulos SET "
+                 + "fam_id=?, "
                 + "nombre=?, "
                 + "codigo=?, "
                 + "cantidad_producto=?, "
@@ -75,6 +77,7 @@ public class ArticulosData {
         int i = 0;
         try {
             ps = cn.prepareStatement(sql);
+            ps.setInt(++i, d.getFam_id());
             ps.setString(++i, d.getNombre());
             ps.setString(++i, d.getCodigo());
             ps.setDouble(++i, d.getCantidad_producto());
@@ -83,7 +86,7 @@ public class ArticulosData {
             
             ps.setString(++i, d.getDescripcion());
             ps.setString(++i, sdf.format(d.getFecha_ingreso()));
-            ps.setInt(++i, d.getId());
+            ps.setInt(++i, d.getIdart());
             comit = ps.executeUpdate();
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "update", ex);
@@ -105,12 +108,7 @@ public class ArticulosData {
         }
         return comit;
     }
-     public static List<Articulos> listCmb(String filter) {
-        List<Articulos> ls = new ArrayList();
-        ls.add(new Articulos("Seleccione artículo..."));
-        ls.addAll(list(filter));
-        return ls;
-    }
+    
 
     public static List<Articulos> list(String filter) {
         String filtert = null;
@@ -136,12 +134,13 @@ public class ArticulosData {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Articulos d = new Articulos();
-                d.setId(rs.getInt("idart"));
+                d.setIdart(rs.getInt("idart"));
+                d.setFam_id(rs.getInt("fam_id"));
                 d.setNombre(rs.getString("nombre"));
                 d.setCodigo(rs.getString("codigo"));
-                d.setCantidad_producto(Double.parseDouble(rs.getString("cantidad_producto")));
+                d.setCantidad_producto(rs.getDouble("cantidad_producto"));
                 d.setTipo_producto(rs.getString("tipo_producto"));
-                d.setPrecio_unidario(Double.parseDouble(rs.getString("precio_unidario")));
+                d.setPrecio_unidario(rs.getDouble("precio_unidario"));
                
                 d.setDescripcion(rs.getString("descripcion"));
                  //d.setFecha_ingreso(rs.getDate("fecha_ingreso"));
@@ -164,25 +163,35 @@ public class ArticulosData {
         }
         return ls;
     }
-     public static List<familiaArticulos> listActivesByFamily(int id) {
-        System.out.println("listByCliente.clie_id:" + id);
+     public static List<Articulos> listActivesByFamily(int fam_id) {
+        System.out.println("listByCliente.fam_id:" + fam_id);
         String sql = "";
-        List<familiaArticulos> ls = new ArrayList<familiaArticulos>();
+        List<Articulos> ls = new ArrayList<Articulos>();
 
-        sql = " SELECT * FROM familiaArticulos "
-                + " WHERE id = " + id 
-                + " ORDER BY id ";
+        sql = " SELECT * FROM articulos "
+                + " WHERE fam_id = " + fam_id 
+                + " ORDER BY idart ";
 
         try {
             Statement st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Articulos d = new Articulos();
-                familiaArticulos f=new familiaArticulos();
-                d.setId(rs.getInt("id"));
-                f.setId(rs.getInt("id"));
-               
-                ls.add(f);
+                
+                d.setIdart(rs.getInt("idart"));
+                d.setFam_id(rs.getInt("fam_id"));
+                d.setNombre(rs.getString("nombre"));
+                d.setCodigo(rs.getString("codigo"));
+                d.setCantidad_producto(rs.getDouble("cantidad_producto"));
+                d.setTipo_producto(rs.getString("tipo_producto"));
+                d.setPrecio_unidario(rs.getDouble("precio_unidario"));
+                d.setDescripcion(rs.getString("descripcion"));
+                 try {
+                    d.setFecha_ingreso(sdf.parse(rs.getString("fecha_ingreso")));
+                    d.setFecha_registro(sdf.parse(rs.getString("fecha_registro")));
+                } catch (Exception e) {
+                }
+                ls.add(d);
             }
         } catch (SQLException ex) {
             log.log(Level.SEVERE, "listByCliente", ex);
@@ -203,14 +212,14 @@ public class ArticulosData {
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 Articulos d = new Articulos();
-                d.setId(rs.getInt("idart"));
+                d.setIdart(rs.getInt("idart"));
                 try {
                     d.setFecha_ingreso(sdf.parse(rs.getString("fecha_ingreso")));
                     d.setFecha_registro(sdf.parse(rs.getString("fecha_registro")));
                 } catch (Exception e) {
                 }
 
-                d.setId(rs.getInt("idart"));
+                d.setFam_id(rs.getInt("fam_id"));
                 d.setNombre(rs.getString("nombre"));
                 d.setCodigo(rs.getString("codigo"));
 
@@ -233,7 +242,8 @@ public class ArticulosData {
             ps.setInt(++i, idart);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                d.setId(rs.getInt("idart"));
+                d.setIdart(rs.getInt("idart"));
+                d.setFam_id(rs.getInt("fam_id"));
                 d.setNombre(rs.getString("nombre"));
                 d.setCodigo(rs.getString("codigo"));
                 d.setCantidad_producto(rs.getDouble("cantidad_producto"));
@@ -266,7 +276,7 @@ public class ArticulosData {
             ps.setString(++i, nombre);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                d.setId(rs.getInt("idart"));
+                d.setIdart(rs.getInt("idart"));
                 d.setNombre(rs.getString("nombre"));
                 d.setCodigo(rs.getString("codigo"));
                 d.setCantidad_producto(rs.getDouble("cantidad_producto"));

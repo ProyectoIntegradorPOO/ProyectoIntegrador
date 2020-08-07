@@ -48,14 +48,14 @@ public class TareaPanel extends javax.swing.JPanel {
     private void paintForm() {
         if (table.getSelectedRow() != -1) {
             Articulos filax = (Articulos) prodTableModel.getRow(table.getSelectedRow());
-            Articulos d = ArticulosData.getByPId(filax.getId());
+            Articulos d = ArticulosData.getByPId(filax.getIdart());
             asignatura.setText(d.getNombre());
             detalles.setText(d.getCodigo());
            
             fecha_vencimiento.setDate(d.getFecha_ingreso());
             fecha_vencimiento.setDate(d.getFecha_registro());
             
-            System.out.printf("getId:%d getSelectedRow:%d \n", d.getId(), table.getSelectedRow());
+            
 
             guardarButton.setText("MODIFICAR");
             guardarButton.setToolTipText("MODIFICAR");
@@ -474,9 +474,9 @@ public class TareaPanel extends javax.swing.JPanel {
             if (table.getSelectedRow() != -1) {// ha seleccionado, update
                 try {
                     Articulos fila = (Articulos) prodTableModel.getRow(table.getSelectedRow());
-                    s.setId(fila.getId());
-                    System.out.println("id:" + s.getId());
-                    if (s.getId() > 0) {
+                    s.setIdart(fila.getIdart());
+                    System.out.println("id:" + s.getIdart());
+                    if (s.getIdart() > 0) {
                         int returnId = ArticulosData.update(s);
                         if (returnId != 0) {
                             paintTable(new TareaTableModel());
@@ -529,9 +529,9 @@ public class TareaPanel extends javax.swing.JPanel {
                 int opc = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar?", "Quitar", JOptionPane.YES_NO_OPTION);
                 if (opc == JOptionPane.OK_OPTION) {
                     Articulos fila = (Articulos) prodTableModel.getRow(table.getSelectedRow());
-                    System.out.printf("eliminarButtonActionPerformed getId:%d getSelectedRow:%d \n", fila.getId(), table.getSelectedRow());
+                    System.out.printf("eliminarButtonActionPerformed getIdart:%d getSelectedRow:%d \n", fila.getIdart(), table.getSelectedRow());
 
-                    int opcion = ArticulosData.delete(fila.getId());
+                    int opcion = ArticulosData.delete(fila.getIdart());
                     if (opcion != 0) {
                         //tableModel.removeRow(table.getSelectedRow());
                         paintTable(new TareaTableModel());

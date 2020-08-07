@@ -40,7 +40,7 @@ public class ArticlessTableModel extends AbstractTableModel {
         lis = ArticulosData.list(filter);
     }
     public ArticlessTableModel(Articulos d){
-        this.lis = ArticulosData.listArticlesById(d.getId());
+        this.lis = ArticulosData.listArticlesById(d.getIdart());
         this.lis.add(new Articulos());
     }
 

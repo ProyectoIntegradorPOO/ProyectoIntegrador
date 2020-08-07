@@ -44,11 +44,11 @@ public class FamiliasPanel extends javax.swing.JPanel {
     private void paintForm() {
         if (tablefamily.getSelectedRow() != -1) {
             familiaArticulos filax = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
-            familiaArticulos d = familiaData.getByPId(filax.getId());
+            familiaArticulos d = familiaData.getByPId(filax.getIdfam());
             
             nombres.setText(d.getNombreFamilia());
             infoadic.setText(d.getDescripcion());
-            System.out.printf("getId:%d getSelectedRow:%d \n", d.getId(), tablefamily.getSelectedRow());
+            System.out.printf("getIdfam:%d getSelectedRow:%d \n", d.getIdfam(), tablefamily.getSelectedRow());
            
             guardarButton.setText("MODIFICAR");
             guardarButton.setToolTipText("MODIFICAR");
@@ -56,8 +56,8 @@ public class FamiliasPanel extends javax.swing.JPanel {
 
     }
     /*familiaArticulos filaxx = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
-    familiaArticulos r = familiaData.getByPId(filaxx.getId());
-    private  int indexselected=r.getId();
+    familiaArticulos r = familiaData.getByPId(filaxx.getIdfam());
+    private  int indexselected=r.getIdfam();
 
     public int getIndexselected() {
         return indexselected;
@@ -428,9 +428,9 @@ public class FamiliasPanel extends javax.swing.JPanel {
             if (tablefamily.getSelectedRow() != -1) {// ha seleccionado, update
                 try {
                     familiaArticulos fila = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
-                    s.setId(fila.getId());
-                    System.out.println("id:" + s.getId());
-                    if (s.getId() > 0) {
+                    s.setIdfam(fila.getIdfam());
+                    System.out.println("id:" + s.getIdfam());
+                    if (s.getIdfam() > 0) {
                         int returnId = familiaData.update(s);
                         if (returnId != 0) {
                             paintTable(new FamiliasTableModel());
@@ -483,9 +483,9 @@ public class FamiliasPanel extends javax.swing.JPanel {
                 int opc = JOptionPane.showConfirmDialog(this, "¿Realmente desea eliminar?", "Quitar", JOptionPane.YES_NO_OPTION);
                 if (opc == JOptionPane.OK_OPTION) {
                     familiaArticulos fila = (familiaArticulos) clientesTableModel.getRow(tablefamily.getSelectedRow());
-                    System.out.printf("eliminarButtonActionPerformed getId:%d getSelectedRow:%d \n", fila.getId(), tablefamily.getSelectedRow());
+                    System.out.printf("eliminarButtonActionPerformed getIdfam:%d getSelectedRow:%d \n", fila.getIdfam(), tablefamily.getSelectedRow());
 
-                    int opcion = familiaData.delete(fila.getId());
+                    int opcion = familiaData.delete(fila.getIdfam());
                     if (opcion != 0) {
                         //tableModel.removeRow(table.getSelectedRow());
                         paintTable(new FamiliasTableModel());
