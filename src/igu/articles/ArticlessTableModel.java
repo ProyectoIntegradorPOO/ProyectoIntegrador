@@ -17,8 +17,8 @@ import javax.swing.table.AbstractTableModel;
 public class ArticlessTableModel extends AbstractTableModel {
 
     private List<Articulos> lis = new ArrayList();
-    private String[] columns = {"#", "nombre", "codigo", "cantidad_producto","tipo_producto","precio_unidario","descripcion", "fecha_ingreso"};
-    private Class[] columnsType = {Integer.class, String.class, String.class, Double.class, String.class,Double.class, String.class, Date.class };
+    private String[] columns = {"#", "nombre",  "cantidad_producto","tipo_producto","precio_unidario","descripcion", "fecha_ingreso"};
+    private Class[] columnsType = {Integer.class, String.class,  Double.class, String.class,Double.class, String.class, Date.class };
     
     SimpleDateFormat iguSDF = new SimpleDateFormat(Config.DEFAULT_DATE_STRING_FORMAT_PE);
     
@@ -53,19 +53,18 @@ public class ArticlessTableModel extends AbstractTableModel {
                 return row + 1;
             case 1:
                 return d.getNombre();
+            
             case 2:
-                return d.getCodigo();
-            case 3:
                 return d.getCantidad_producto();
-            case 4:
+            case 3:
                 return d.getTipo_producto();
-            case 5:
+            case 4:
                 return d.getPrecio_unidario();
             
-            case 6:
+            case 5:
                 return d.getDescripcion();     
                 
-            case 7:
+            case 6:
                 //Date f=d.getFecha_ingreso();
                 //return iguSDF.format(f);
                 return d.getFecha_ingreso();

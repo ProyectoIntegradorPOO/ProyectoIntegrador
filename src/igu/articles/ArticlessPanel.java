@@ -281,10 +281,14 @@ public class ArticlessPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(descripciontxt);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Codigo:");
 
         codigotxt.setEditable(false);
         codigotxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        codigotxt.setBorder(null);
+        codigotxt.setEnabled(false);
+        codigotxt.setOpaque(false);
 
         cantidadtxt.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
